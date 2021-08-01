@@ -1,11 +1,7 @@
 # Scientific Python Final Project
 
 ## Short description
-<<<<<<< HEAD
 This project will contain an interactive **web scrapper** with an **user intafece** based on the browser where the use will be able to filter their search and **annotate** the scrapped data. However the scrapper will only work on the webstore of Vinted.com.
-=======
-This project will contain an interactive **web scrapper** with an **user intafece** created in the browser where the use will be able to filter their search and **annotate** the scrapped data
->>>>>>> de7c702456f72be9ec09d4d697f5d313d92c3b87
 
 ## Requirements
 For the scrapper to run 

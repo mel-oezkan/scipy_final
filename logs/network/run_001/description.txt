@@ -1,0 +1,1 @@
+this folder should contain the confusion matrix of the network as well as the weights of the best iterations. Additionally the images of the history can be saved here as well

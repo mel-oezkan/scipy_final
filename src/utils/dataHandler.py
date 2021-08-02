@@ -3,3 +3,11 @@ import pandas as pd
 import os
 
 data_path = os
+
+def to_image() -> None:
+    """ When the user annotates the images the reviewed images
+    will be save as png files within the data directory for later
+    use, when the network will be trained
+    """
+    
+    pass

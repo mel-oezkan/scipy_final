@@ -1,5 +1,26 @@
 # Scientific Python - Final Project
 
+## ToDo:
+### SCRAPPER
+- [ ] Reding of the config file and creating the respective url
+- [ ] Iterating trough the pages 
+    - [ ] Handling min and max amount of articles to read
+    - [ ] Implementing a stop criteria
+- [ ] Complete the category and size ids
+
+## VISUALIZATION
+- [ ] Plotting the different attributes according to clothing type
+- [ ] Comparing availability between genders 
+- [ ] Plot the color diversity between genders
+- ...
+
+## ANNOTATOR
+- [ ] Create the annotation page
+    - [ ] DS handling
+    - [ ] Ajax interactions
+- ...
+
+
 ## Short description
 This project will contain an interactive **web scrapper** with an **user intafece** based on the browser where the use will be able to filter their search and **annotate** the scrapped data. However the scrapper will only work on the webstore of Vinted.com.
 

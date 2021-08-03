@@ -8,13 +8,13 @@
     - [ ] Implementing a stop criteria
 - [ ] Complete the category and size ids
 
-## VISUALIZATION
+### VISUALIZATION
 - [ ] Plotting the different attributes according to clothing type
 - [ ] Comparing availability between genders 
 - [ ] Plot the color diversity between genders
 - ...
 
-## ANNOTATOR
+### ANNOTATOR
 - [ ] Create the annotation page
     - [ ] DS handling
     - [ ] Ajax interactions

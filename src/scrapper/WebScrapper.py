@@ -118,18 +118,33 @@ class Scrapper:
         # Handles the configuration
 
         # create the url
+        select_page = lambda x: (None + "&page={x}")
 
         # loop over pages
 
+
         return None
 
-    def test_run(self, pages=1):
+    def test_run(self, pages=1, page_range=None):
+        
+
         test_url = "https://www.vinted.de/vetements?color_id[]=1&color_id[]=12&catalog[]=76"
 
-        # add the page number
-        select_page = lambda x: (test_url + "&page={x}")
+        if not(page_range):
+            page_from = 1
+            page_to = pages         
+        else:
+            if len(page_range) > 2: 
+                raise ValueError("Page range exceeds two values")
 
-        self.scrap_current(select_page(1))
+            page_from = page_range[0]
+            page_to = page_range[1]
+
+        select_page = lambda x: (test_url + "&page={x}")
+        for page in range(page_from, page_to):
+
+            # add the page number
+            self.scrap_current(select_page(page))
 
 
     def test(self):

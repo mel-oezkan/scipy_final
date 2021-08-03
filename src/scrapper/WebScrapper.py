@@ -6,11 +6,13 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 import os
+import csv
 
 class Scrapper:
 
-    def __init__(self):
+    def __init__(self, ds_name=None):
         self.initalize_drivers()
+        self._handle_ds()
 
     # using a static method since this function is not bound to 
     # any class variables and makes it easier to call recursively 
@@ -37,16 +39,17 @@ class Scrapper:
         # determine the operating system
         user_os = platform
         curr_path = os.getcwd()
+        print(curr_path)
 
         if user_os == "linux":
-            path = os.path.join(curr_path, "drivers/chromedriver_linux64")
+            path = curr_path + "/drivers/chromedriver_linux64/chromedriver"
         
         elif user_os == "win32":
-            path = os.path.join(curr_path, "drivers/chromedriver_win32")
+            path = curr_path + "/drivers/chromedriver_win32/chromedriver"
 
         # alis for mac_os
         elif user_os == "darwin":
-            path = os.path.join(curr_path, "drivers/chromedriver_mac64")
+            path = curr_path + "/drivers/chromedriver_mac64/chromedriver"
 
         else:
             raise ValueError(
@@ -56,6 +59,80 @@ class Scrapper:
 
         self.driver = webdriver.Chrome(path)
 
+    def _handle_ds(self, name=None):
+        """ Checks if name was set. If not append to global ds """ 
+        
+        if name:
+            self.ds_path = f"data/{name}.csv"
+        else:
+            self.ds_path = "data/full_data.csv"
 
+    def scrap_current(self, curr_url):
+        """ Takes a url and searches for all articles which are
+        scrapped afterwards
+        """
+        
+        self.driver.get(curr_url)
+
+        posts = self.driver.find_elements_by_class_name("feed-grid__item")
+        
+        for index, post in enumerate(posts):
+            
+            price = post.find_elements_by_tag_name("h3")
+            
+            # 0:auth, 1:likes, 2:size, 3:brand
+            infos = post.find_elements_by_tag_name("h4")
+
+            # Best matches contains span text indicating a skip section 
+            is_skip = post.find_elements_by_tag_name("span")
+            
+            links = post.find_elements_by_tag_name("a")
+
+            auth_source = links[0].get_attribute("href")
+            art_source = links[1].get_attribute("href")
+
+            # Handling Banners which are not articles
+            if "Best Matches" in [i.text for i in is_skip]:
+                continue
+
+            print([info.text for info in infos])
+            print(len(price))
+
+            row = []
+            row.append(infos[0].text)
+            row.append(infos[1].text)
+            row.append(infos[2].text)
+            row.append(infos[3].text)
+            row.append(price[0].text)
+            row.append(art_source)
+            row.append(auth_source)
+
+            with open(self.ds_path, 'a') as f:
+                # create the csv writer
+                writer = csv.writer(f)
+
+                # write a row to the csv file
+                writer.writerow(row)
+    
+    def run(self, num_pages=1):
+        # Handles the configuration
+
+        # create the url
+
+        # loop over pages
+
+        return None
+
+    def test_run(self, pages=1):
+        test_url = "https://www.vinted.de/vetements?color_id[]=1&color_id[]=12&catalog[]=76"
+
+        # add the page number
+        select_page = lambda x: (test_url + "&page={x}")
+
+        self.scrap_current(select_page(1))
+
+
+    def test(self):
+        print("hallo")
 
 

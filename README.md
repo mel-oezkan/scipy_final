@@ -17,8 +17,8 @@ A function to scrap all the items given a search query. E.g. the user wants alle
 Given an username find all information about that person. Check the reviews, save links to all listed items and check for the amount of likes and overall prices. 
 
 - [ ] Find url for users 
-    - [ ] Serch for the user since url needs the id of user
-- [ ] Find usefull Tags or X-paths to the reviews
+    - [ ] Search for the user since url needs the id of user
+- [ ] Find usefull tags or X-paths to the reviews
 - [ ] Loop over multiple pages is given
 
 
@@ -39,7 +39,7 @@ Given an username find all information about that person. Check the reviews, sav
 
 
 ## Short description
-This project will contain an interactive **web scrapper** with an **user intafece** based on the browser where the use will be able to filter their search and **annotate** the scrapped data. However the scrapper will only work on the webstore of Vinted.com.
+This project will contain an interactive **web scrapper** with an **user interface** based on the browser where the use will be able to filter their search and **annotate** the scrapped data. However the scrapper will only work on the webstore of Vinted.com.
 
 ## Requirements
 For the scrapper to run 

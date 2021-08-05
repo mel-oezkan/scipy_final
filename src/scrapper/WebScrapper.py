@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 
 import os
 import csv
+import sys
 
 class Scrapper:
 
@@ -75,6 +76,9 @@ class Scrapper:
         self.driver.get(curr_url)
 
         posts = self.driver.find_elements_by_class_name("feed-grid__item")
+
+        if not(posts):
+            sys.exit(0)
         
         for index, post in enumerate(posts):
             

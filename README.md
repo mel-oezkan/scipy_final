@@ -54,6 +54,25 @@ Create conda env using:
 Each of the modules has a seperate argument. If you want to run the scrapper just type:  
 ```python run.py --mode scrapper --page_range [1-15]```
 
+When running the scrapper you have to create or modifiy a config file. In this case this fill will be ```config.yaml```. Within this file you can specify which kind of clothes you want and also define some other parameters such as size, color, brands ect.. When creating the config file the entries should follow this pattern
+**config.yaml**
+```
+args = [
+        {"gender": "femal", "category": shoes", "size": [36, 37], "color": ["red", "green"], "brand": ["nike", "addidas"]},
+        {"gender": "male", "category": shoes", "size": [36, 37], "color": ["red", "green"], "brand": ["nike", "addidas"]},
+        {"gender": "male", "category": pants", "size": ["M", "L"]}
+    ]
+```
+
+or using the yaml type description:
+```
+args:
+    - {"gender": "femal", "category": shoes", "size": [36, 37], "color": ["red", "green"], "brand": ["nike", "addidas"]},
+    - {"gender": "male", "category": shoes", "size": [36, 37], "color": ["red", "green"], "brand": ["nike", "addidas"]},
+    - {"gender": "male", "category": pants", "size": ["M", "L"]}
+```
+
+
 ## File structure
 - data
     - contains the generated csv files with information about the seller, price, color, clothing type
@@ -69,9 +88,3 @@ Each of the modules has a seperate argument. If you want to run the scrapper jus
 │   └── annotator.py  
 │   └── scrapper.py  
 │   └── trainer.py  
-
-## Functionalities
-
-### Scrapper
-The scrapper takes gendered arguments. This makes accessing male and female clothing at the same time more coonvinient rather than implementing a config parser. Running the scrapper could look like:  
-```python run.py --mode scrapper --gender [male, female] --category shoes --sizes w_size

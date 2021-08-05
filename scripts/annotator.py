@@ -9,5 +9,6 @@ sys.path.append('.')
 parser = argparse.ArgumentParser(description="")
 
 # Run the flask web app
+from src.annotator.main import main
 
-os.system("python ../src/annotator/main.py")
+main()

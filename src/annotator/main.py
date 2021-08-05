@@ -2,12 +2,23 @@ from flask import Flask
 import webbrowser
 import os
 
+from flask import render_template
+from flask import request
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello():
-    return 'Hello, World!'
+    if request.method == 'POST':
+        pass
+    
+    # gives back the link to the images such that it gets displayed
+    # should test the image with request (or something else) first
+    img_src = "test.png"
+    return render_template('register.html', img_src=img_src)
+
+
 
 def main():
     

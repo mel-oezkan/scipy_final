@@ -62,12 +62,12 @@ category_w = {
 
 # only all 
 category_m = {
-    
+    "shoes": "test"
 } 
 
 sizes_man = {
     "clothes": None,
-    "shoes": None
+    "shoes": shoes_m,
 }
 
 sizes_female = {

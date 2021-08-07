@@ -6,11 +6,11 @@
 #### Task 1
 A function to scrap all the items given a search query. E.g. the user wants alle entries from page 1 to 10 containing male t-shirts.
 
-- [ ] Reding of the config file and creating the respective url
-- [ ] Iterating trough the pages 
-    - [ ] Handling min and max amount of articles to read
-    - [ ] Implementing a stop criterion
-    - [ ] Fail case. What happens if there is no next page?
+- [X] Reding of the config file and creating the respective url
+- [X] Iterating trough the pages 
+    - [X] Handling min and max amount of articles to read
+    - [X] Implementing a stop criterion
+    - [X] Fail case. What happens if there is no next page?
 - [ ] Complete the category and size ids
 
 #### Task 2 
@@ -52,7 +52,7 @@ Create conda env using:
 
 ## Instructions
 Each of the modules has a seperate argument. If you want to run the scrapper just type:  
-```python run.py --mode scrapper --page_range [1-15]```
+```python run.py --mode scrapper --page_range [1-15] --config_file main.yaml```
 
 When running the scrapper you have to create or modifiy a config file. In this case this fill will be ```config.yaml```. Within this file you can specify which kind of clothes you want and also define some other parameters such as size, color, brands ect.. When creating the config file the entries should follow this pattern
 **config.yaml**
@@ -72,6 +72,8 @@ args:
     - {"gender": "male", "category": pants", "size": ["M", "L"]}
 ```
 
+resulting urls should look something like:
+``` https://www.vinted.de/vetements?color_id[]=1&color_id[]=12&catalog[]=76&catalog[]=1904&time=1628187997&page=500 ```
 
 ## File structure
 - data

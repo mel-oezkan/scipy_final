@@ -1,7 +1,8 @@
 
 
+
 # Category: SHOES
-shoes_w = {
+shoes_f = {
     35.0:"size_id[]=55",
     35.5:"size_id[]=1195",
     36.0:"size_id[]=56",
@@ -56,35 +57,53 @@ ring_sizes = {
 # Category: CATEGORY
 
 # only all 
-category_w = {
-
-} 
-
-# only all 
-category_m = {
+male_catergories = {
     "shoes": "test"
 } 
 
-sizes_man = {
+female_catergories = {
+    "shoes": None,
+    "pants": None,
+    "shirt": None,
+} 
+
+male_sizes = {
     "clothes": None,
     "shoes": shoes_m,
+    "rings": ring_sizes
 }
 
-sizes_female = {
-    "clothes": None
+female_sizes = {
+    "clothes": 12,
+    "shoes": shoes_f,
+    "rings": ring_sizes,
 }
 
-
-unisex_sizes = {
-    "rings": None
+brands = {
+    "addidas": None,
+    "nike": None,
+    "prada": None,
 }
+
+colors = {
+    "red": "color_id[]=187", # not real id
+    "green": None,
+}
+
+male_conf = {
+    "sizes": male_sizes,
+    "category": male_catergories,
+}
+
+female_conf = {
+    "sizes": female_sizes,
+    "category": female_catergories
+}
+
 
 Mapper = {
-    "male": sizes_man,
-    "female": sizes_female,
-
-    "male_category": category_m,
-    "female_category": category_w,
-
-    
+    "male": male_conf,
+    "female": female_conf,    
+    "colors": colors,
+    "brands": brands, 
 }

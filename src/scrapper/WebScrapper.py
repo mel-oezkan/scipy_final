@@ -1,5 +1,6 @@
 import selenium
 from src.scrapper.IdMaps import Mapper
+from src.scrapper.ConfigParser import create_conf, read_conf
 from sys import platform
 
 from selenium import webdriver
@@ -14,6 +15,7 @@ class Scrapper:
     def __init__(self, ds_name=None):
         self.initalize_drivers()
         self._handle_ds()
+        self.base_url = "https://www.vinted.de/vetements?"
 
     # using a static method since this function is not bound to 
     # any class variables and makes it easier to call recursively 
@@ -118,8 +120,11 @@ class Scrapper:
                 # write a row to the csv file
                 writer.writerow(row)
     
-    def run(self, num_pages=1):
+    def run(self, config_path, num_pages=1):
         # Handles the configuration
+        config = read_conf(config_path)
+        conf_url = create_conf(config) 
+
 
         # create the url
         select_page = lambda x: (None + "&page={x}")

@@ -3,9 +3,9 @@ import yaml
 
 def read_conf(config_path):
     with open(config_path, "a") as file:
-        pass
+        conf = yaml.load(file, Loader=yaml.FullLoader)
 
-    return None
+    return conf
 
 def create_conf(args, base_url) -> str:
     """ Given the different preferences the function maps those inputs into 

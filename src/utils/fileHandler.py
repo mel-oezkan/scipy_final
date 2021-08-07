@@ -1,6 +1,9 @@
 import os
 import re
 
+import numpy as np
+import imageio as io
+
 def check_current_index() -> int:
     """ Used for getting the current index of global runs
     made until this point. Checks the logs for the 
@@ -29,3 +32,5 @@ def check_current_index() -> int:
 
         return temp 
     
+def read_img(path) -> np.array:
+    return io.imread(path)

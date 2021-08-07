@@ -6,21 +6,23 @@
 #### Task 1
 A function to scrap all the items given a search query. E.g. the user wants alle entries from page 1 to 10 containing male t-shirts.
 
-- [X] Reding of the config file and creating the respective url
 - [X] Iterating trough the pages 
     - [X] Handling min and max amount of articles to read
     - [X] Implementing a stop criterion
     - [X] Fail case. What happens if there is no next page?
 - [ ] Complete the category and size ids
 
-#### Task 2 
-Given an username find all information about that person. Check the reviews, save links to all listed items and check for the amount of likes and overall prices. 
+#### Task 2
+- [ ] Add another function to scrap the images from the articles
+- [ ] Needs a error handler
+    - Page can be already deleted such that reading images will result in error
 
-- [ ] Find url for users 
-    - [ ] Search for the user since url needs the id of user
-- [ ] Find usefull tags or X-paths to the reviews
-- [ ] Loop over multiple pages is given
-
+#### Task 3
+- [X] Reding of the config file and creating the respective url
+- [ ] Handling of the sub catrogires 
+    - "Ripped Jeans" -> "Clothing"
+    - "Manschenttenknöpfe" -> "Schmuck"
+- [ ] Creating mappings from "Manschenttenknöpfe" to clothing sizes
 
 ### VISUALIZATION
 - [ ] Plotting the different attributes according to clothing type

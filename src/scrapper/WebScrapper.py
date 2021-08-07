@@ -9,11 +9,15 @@ from selenium.webdriver.common.keys import Keys
 import os
 import csv
 import sys
+import time
+
+import imageio as io
+import urllib.request
 
 class Scrapper:
 
-    def __init__(self, ds_name=None):
-        self.initalize_drivers()
+    def __init__(self, ds_name=None, silent=True):
+        self.initalize_drivers(silent)
         self._handle_ds()
         self.base_url = "https://www.vinted.de/vetements?"
 
@@ -38,7 +42,7 @@ class Scrapper:
 
         return query
 
-    def initalize_drivers(self):
+    def initalize_drivers(self, silent):
         # determine the operating system
         user_os = platform
         curr_path = os.getcwd()
@@ -60,7 +64,11 @@ class Scrapper:
                 operating system. Try running this porgram 
                 on docker or a vm""")
 
-        self.driver = webdriver.Chrome(path)
+        if silent:
+            options = webdriver.ChromeOptions()
+            options.add_argument("headless")
+
+        self.driver = webdriver.Chrome(path, chrome_options=options)
 
     def _handle_ds(self, name=None):
         """ Checks if name was set. If not append to global ds """ 
@@ -156,7 +164,25 @@ class Scrapper:
             self.scrap_current(select_page(page))
 
 
-    def test(self):
-        print("hallo")
+    def article_images(self, art_url, savepath=None):
+        
+        self.driver.get(art_url)
 
+        image_container = self.driver.find_element_by_class_name("item-photos")
+        images = image_container.find_elements_by_tag_name("a")
+
+        as_list = []
+
+        for img in images:
+            img_url = img.get_attribute("href")
+            
+            if savepath:
+                file_path = os.path.join(savepath, f"{time.time():.0f}.jpg")
+                urllib.request.urlretrieve(img_url, file_path)
+
+            else:
+                temp_img = io.imread(img_url)
+                as_list.append(temp_img)
+
+        return as_list
 

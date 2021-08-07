@@ -13,7 +13,7 @@ A function to scrap all the items given a search query. E.g. the user wants alle
 - [ ] Complete the category and size ids
 
 #### Task 2
-- [ ] Add another function to scrap the images from the articles
+- [X] Add another function to scrap the images from the articles
 - [ ] Needs a error handler
     - Page can be already deleted such that reading images will result in error
 
@@ -28,6 +28,9 @@ A function to scrap all the items given a search query. E.g. the user wants alle
 - [ ] Plotting the different attributes according to clothing type
 - [ ] Comparing availability between genders 
 - [ ] Plot the color diversity between genders
+- [X] Sampling 4 rows from the dataset and ploting the images of those articles
+    - (implemented in ```src/utils/visualizer.py```)
+    - amount can be changed by modifiying the range it iterates trough
 - ...
 
 ### ANNOTATOR

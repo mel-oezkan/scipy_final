@@ -11,3 +11,9 @@ def to_image() -> None:
     """
     
     pass
+
+def clen_dataset(path):
+    # checks if the articles are still online
+    # and removes enties which are not
+
+    pass

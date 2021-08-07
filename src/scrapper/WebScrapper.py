@@ -64,9 +64,12 @@ class Scrapper:
                 operating system. Try running this porgram 
                 on docker or a vm""")
 
+        options = webdriver.ChromeOptions()
         if silent:
-            options = webdriver.ChromeOptions()
             options.add_argument("headless")
+            options.add_argument('disable-blink-features=AutomationControlled')
+            options.add_argument('user-agent=fake_user')
+
 
         self.driver = webdriver.Chrome(path, chrome_options=options)
 
@@ -84,7 +87,9 @@ class Scrapper:
         """
         
         self.driver.get(curr_url)
-
+        
+        self.driver.maximize_window()
+        self.driver.implicitly_wait(20)
         posts = self.driver.find_elements_by_class_name("feed-grid__item")
 
         if not(posts):
@@ -164,11 +169,18 @@ class Scrapper:
             self.scrap_current(select_page(page))
 
 
-    def article_images(self, art_url, savepath=None):
+    def article_images(self, art_url, sample=False, savepath=None):
         
         self.driver.get(art_url)
-
+        self.driver.implicitly_wait(5)
         image_container = self.driver.find_element_by_class_name("item-photos")
+        
+
+        if not(image_container):
+            # returns None which will be a signal 
+            # for the main code to act acordingly
+            return None
+
         images = image_container.find_elements_by_tag_name("a")
 
         as_list = []
@@ -182,6 +194,8 @@ class Scrapper:
 
             else:
                 temp_img = io.imread(img_url)
+                if sample:
+                    return [temp_img]
                 as_list.append(temp_img)
 
         return as_list

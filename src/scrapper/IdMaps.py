@@ -55,10 +55,22 @@ ring_sizes = {
 }
 
 # Category: CATEGORY
+size_category_map = {
+    "shoes": ["stiefel", "sneaker"],
+    "clothes": [""],
+    "rings": ["ringe"]
+}
+
 
 # only all 
 male_catergories = {
-    "shoes": "test"
+    "all": "catalog[]=5",
+    "shoes": "test",
+    "jeans": "catalog[]=257",
+    "mäntel": "",
+    "jacken": "", 
+    "hemden": "",
+
 } 
 
 female_catergories = {
@@ -80,14 +92,49 @@ female_sizes = {
 }
 
 brands = {
-    "addidas": None,
-    "nike": None,
-    "prada": None,
+    "nike":'brand_id[]=53',
+    "zara": 'brand_id[]=12',
+    "addidas": 'brand_id[]=14',
+    "levis": 'brand_id[]=10',
+    "h&m": 'brand_id[]=7',
+    "ralph lauren": 'brand_id[]=88',
+    "mango": 'brand_id[]=15',
+    "tommy hilfiger": 'brand_id[]=94',
+    "lacoste": 'brand_id[]=304',
+    "calvin klein": 'brand_id[]=255',
+    "guess": 'brand_id[]=20',
+    "michael kors": 'brand_id[]=6005'
 }
 
 colors = {
-    "red": "color_id[]=187", # not real id
-    "green": None,
+    "schwarz": 'color_id[]=1',
+    "grau": 'color_id[]=3',
+    "weiß": 'color_id[]=12',
+    "creme": 'color_id[]=20',
+    "beige": 'color_id[]=4',
+    "aprikose": 'color_id[]=21',
+    "orange": 'color_id[]=11',
+    "korallenrot": 'color_id[]=22',
+    "rot": 'color_id[]=7',
+    "burgunderrot": 'color_id[]=23',
+    "pink": 'color_id[]=5',
+    "rose": 'color_id[]=24',
+    "lila": 'color_id[]=6',
+    "flieder": 'color_id[]=25',
+    "hellblau": 'color_id[]=26',
+    "blau": 'color_id[]=9',
+    "marienblau": 'color_id[]=27',
+    "türkis": 'color_id[]=17',
+    "mintgrün": 'color_id[]=30',
+    "grün": 'color_id[]=10',
+    "dunkelgrün": 'color_id[]=28',
+    "khaki": 'color_id[]=16',
+    "braun": 'color_id[]=2',
+    "senffarben": 'color_id[]=29',
+    "gelb": 'color_id[]=8',
+    "silber": 'color_id[]=13',
+    "gold": 'color_id[]=14',
+    "bunt": 'color_id[]=15'
 }
 
 male_conf = {
@@ -106,4 +153,5 @@ Mapper = {
     "female": female_conf,    
     "colors": colors,
     "brands": brands, 
+    "helper": size_category_map
 }

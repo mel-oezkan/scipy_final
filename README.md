@@ -14,7 +14,7 @@ A function to scrap all the items given a search query. E.g. the user wants alle
 
 #### Task 2
 - [X] Add another function to scrap the images from the articles
-- [ ] Needs a error handler
+- [X] Needs a error handler
     - Page can be already deleted such that reading images will result in error
 
 #### Task 3
@@ -31,15 +31,6 @@ A function to scrap all the items given a search query. E.g. the user wants alle
 - [X] Sampling 4 rows from the dataset and ploting the images of those articles
     - (implemented in ```src/utils/visualizer.py```)
     - amount can be changed by modifiying the range it iterates trough
-- ...
-
-### ANNOTATOR
-- [ ] Create the annotation page
-    - [ ] Handling the dataset
-        - [ ] Save the images in a seperate folder when the user tags them as either like or dislike
-        - [ ] Save all images from one article
-        - [ ] (Include relabeling of unseen images)
-    - [ ] Ajax interactions
 - ...
 
 

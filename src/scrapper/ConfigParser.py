@@ -4,15 +4,15 @@ import yaml
 
 class Config:
     def __init__(self):
-        pass
+        self.base_url = "https://www.vinted.de/vetements?"
 
-    def read_conf(config_path):
+    def read_conf(self, config_path):
         with open(config_path, "a") as file:
             conf = yaml.load(file, Loader=yaml.FullLoader)
 
         return conf
 
-    def create_conf(args, base_url) -> str:
+    def create_conf(self, config_path) -> str:
         """ Given the different preferences the function maps those inputs into 
         their respective string notation and appends them to the url
         
@@ -24,8 +24,10 @@ class Config:
         ]
         """
 
+        args = self.read_conf(config_path)
+
         # class will contain value
-        url = base_url + "&"
+        url = self.base_url
 
         arg_dict = {
             "sizes": [],
@@ -57,15 +59,12 @@ class Config:
             # need a way of looking up which sizes the config 
             # shoudl grab 
 
-            size_lookup = Mapper["helper"]
-            for key in size_lookup.keys():
-                if arg["category"] in size_lookup[key]:
-                    size_type = key
+            size_type = self.main_category(arg["category"])
 
             if "size" in arg.keys():
                 # print(arg["category"])
                 size_conf = temp_conf["sizes"][size_type]
-                print(size_conf)
+
                 for size in arg["size"]:
                     # check if value is a valid key for the dict
                     if size not in size_conf: 
@@ -100,6 +99,8 @@ class Config:
                     brand_token = brand_conf[brand]
                     arg_dict["brands"].append(brand_token)
 
+        # Using the dict mehtod to create the final url
+        # allows for delteting multiples befor generation 
         for key in arg_dict.keys():
             for token in set(arg_dict[key]):
                 url += str(token) + "&"
@@ -107,4 +108,17 @@ class Config:
         return url, arg_dict
 
 
-    
+    def main_category(self, sub):
+        size_lookup = Mapper["helper"]
+
+        size_type = None
+        for key in size_lookup.keys():
+            if sub in size_lookup[key]:
+                size_type = key
+
+        if size_type:
+            return size_type
+
+        raise NotImplementedError("""Sadly the selected category 
+            does not match any predefined size category. Either 
+            create an github issue or try a more general search term.""")

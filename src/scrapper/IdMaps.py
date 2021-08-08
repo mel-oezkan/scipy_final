@@ -1,5 +1,39 @@
 
+# Category: CLOTHES
+clothes_f = {
+    "XXS": "size_id[]=102",
+    "XS": "size_id[]=2",
+    "S": "size_id[]=3",
+    "M": "size_id[]=4",
+    "L": "size_id[]=5",
+    "XL": "size_id[]=6",
+    "XXL": "size_id[]=7",
 
+    32: "size_id[]=102",
+    34: "size_id[]=2",
+    36: "size_id[]=3",
+    38: "size_id[]=4",
+    40: "size_id[]=5",
+    42: "size_id[]=6",
+    44: "size_id[]=7",
+
+    4: "size_id[]=102",
+    6: "size_id[]=2",
+    8: "size_id[]=3",
+    10: "size_id[]=4",
+    12: "size_id[]=5",
+    14: "size_id[]=6",
+    16: "size_id[]=7",
+}
+
+clothes_m = {
+    "XS": "size_id[]=206",
+    "S": "size_id[]=207",
+    "M": "size_id[]=208",
+    "L": "size_id[]=209",
+    "XL": "size_id[]=210",
+    "XXL": "size_id[]=211",    
+}
 
 # Category: SHOES
 shoes_f = {
@@ -56,27 +90,60 @@ ring_sizes = {
 
 # Category: CATEGORY
 size_category_map = {
-    "shoes": ["stiefel", "sneaker"],
-    "clothes": [""],
+
+    "shoes": [
+        "stiefel", "oxfords", "slippers",
+        "elegante schuhe", "sportschuhe",
+        "sandalen"],
+
+    "clothes": [
+        "mäntel", "jacken", "hemden",
+        "pullis", "t-shirts", "westen",
+        "hosen", "jeans", "shorts",
+        "sport_hose", "sport_pulli", 
+        "sport_shorts", "trainingsanzüge",
+        "gürtel", "sonnenbrillen"],
+
     "rings": ["ringe"]
 }
 
 
 # only all 
 male_catergories = {
-    "all": "catalog[]=5",
-    "shoes": "test",
     "jeans": "catalog[]=257",
-    "mäntel": "",
-    "jacken": "", 
-    "hemden": "",
-
+    "jacken": "catalog[]=2052",
+    "mäntel": "catalog[]=2051",
+    "hemden": "catalog[]=536",
+    "t-Shirts": "catalog[]=77",
+    "anzughosen": "catalog[]=1787",
+    "sweater": "catalog[]=1811",
+    "pullis": "catalog[]=267",
+    "hoodies": "catalog[]=267",
+    "kapuzenjacken": "catalog[]=1812",
+    "rollkragenpullover": "catalog[]=265",
+    "lange pullover": "catalog[]=1814",
+    "flipflops": "catalog[]=1237",
+    "turnschuhe": "catalog[]=1242",
+    "sportschuhe": "catalog[]=1452",
+    "stiefel": "catalog[]=1233", 
 } 
 
 female_catergories = {
-    "shoes": None,
-    "pants": None,
-    "shirt": None,
+    "stiefel": "catalog[]=211",
+    "gummistiefel": "catalog[]=2135",
+    "cowboystiefel": "catalog[]=54",
+    "boots": "catalog[]=1049",
+    "absatzschuhe": "catalog[]=543",
+    "flache schuhe": "catalog[]=1050",
+    "ballerinas": "catalog[]=548",
+    "stiefelette": "catalog[]=210",
+    "turnschuhe": "catalog[]=1916",
+    "sandalen": "catalog[]=207",
+    "flip-flops": "catalog[]=546",
+    "sonnenbrillen": "catalog[]=26",
+    "ringe": "catalog[]=553",
+    "ketten": "catalog[]=164",
+    "ohrringe": "catalog[]=163",
 } 
 
 male_sizes = {

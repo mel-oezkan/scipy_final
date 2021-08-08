@@ -9,21 +9,21 @@ clothes_f = {
     "XL": "size_id[]=6",
     "XXL": "size_id[]=7",
 
-    32: "size_id[]=102",
-    34: "size_id[]=2",
-    36: "size_id[]=3",
-    38: "size_id[]=4",
-    40: "size_id[]=5",
-    42: "size_id[]=6",
-    44: "size_id[]=7",
+    32.0: "size_id[]=102",
+    34.0: "size_id[]=2",
+    36.0: "size_id[]=3",
+    38.0: "size_id[]=4",
+    40.0: "size_id[]=5",
+    42.0: "size_id[]=6",
+    44.0: "size_id[]=7",
 
-    4: "size_id[]=102",
-    6: "size_id[]=2",
-    8: "size_id[]=3",
-    10: "size_id[]=4",
-    12: "size_id[]=5",
-    14: "size_id[]=6",
-    16: "size_id[]=7",
+    4.0: "size_id[]=102",
+    6.0: "size_id[]=2",
+    8.0: "size_id[]=3",
+    10.0: "size_id[]=4",
+    12.0: "size_id[]=5",
+    14.0: "size_id[]=6",
+    16.0: "size_id[]=7",
 }
 
 clothes_m = {
@@ -94,15 +94,15 @@ size_category_map = {
     "shoes": [
         "stiefel", "oxfords", "slippers",
         "elegante schuhe", "sportschuhe",
-        "sandalen"],
+        "sandalen", "turnschuhe"],
 
     "clothes": [
         "mäntel", "jacken", "hemden",
         "pullis", "t-shirts", "westen",
-        "hosen", "jeans", "shorts",
-        "sport_hose", "sport_pulli", 
+        "hosen", "jeans", "shorts", "sport_pulli", 
         "sport_shorts", "trainingsanzüge",
-        "gürtel", "sonnenbrillen"],
+        "gürtel", "sonnenbrillen",
+        "lange pullover"],
 
     "rings": ["ringe"]
 }
@@ -147,13 +147,13 @@ female_catergories = {
 } 
 
 male_sizes = {
-    "clothes": None,
+    "clothes": clothes_m,
     "shoes": shoes_m,
     "rings": ring_sizes
 }
 
 female_sizes = {
-    "clothes": 12,
+    "clothes": clothes_f,
     "shoes": shoes_f,
     "rings": ring_sizes,
 }

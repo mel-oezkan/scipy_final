@@ -33,6 +33,9 @@ A function to scrap all the items given a search query. E.g. the user wants alle
     - amount can be changed by modifiying the range it iterates trough
 - ...
 
+##### Further improvements
+- Adding negative configs (All colors except green)
+
 
 ## Short description
 This project will contain an interactive **web scrapper** with an **user interface** based on the browser where the use will be able to filter their search and **annotate** the scrapped data. However the scrapper will only work on the webstore of Vinted.com.

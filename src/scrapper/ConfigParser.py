@@ -7,7 +7,7 @@ class Config:
         self.base_url = "https://www.vinted.de/vetements?"
 
     def read_conf(self, config_path):
-        with open(config_path, "a") as file:
+        with open(config_path, "r") as file:
             conf = yaml.load(file, Loader=yaml.FullLoader)
 
         return conf
@@ -64,16 +64,20 @@ class Config:
             if "size" in arg.keys():
                 # print(arg["category"])
                 size_conf = temp_conf["sizes"][size_type]
+                #print(temp_conf["sizes"])
 
                 for size in arg["size"]:
+
+                    if isinstance(size, int):
+                        size = float(size)
+
                     # check if value is a valid key for the dict
                     if size not in size_conf: 
                         raise ValueError(f"Argument {size} is not supported. Either change the sizes or contac the creators via github")
 
                     # add the respective url tokens based on the 
                     # given catergory
-                    print(float(size))
-                    arg_dict["sizes"].append(size_conf[float(size)])
+                    arg_dict["sizes"].append(size_conf[size])
             
 
             if "color" in arg.keys():

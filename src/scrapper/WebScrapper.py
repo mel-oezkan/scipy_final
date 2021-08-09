@@ -1,6 +1,6 @@
 import selenium
 from src.scrapper.IdMaps import Mapper
-from src.scrapper.ConfigParser import create_conf, read_conf
+from src.scrapper.ConfigParser import Config
 from sys import platform
 
 from selenium import webdriver
@@ -18,35 +18,13 @@ class Scrapper:
 
     def __init__(self, ds_name=None, silent=True):
         self.initalize_drivers(silent)
-        self._handle_ds()
+        self._handle_ds(ds_name)
         self.base_url = "https://www.vinted.de/vetements?"
-
-    # using a static method since this function is not bound to 
-    # any class variables and makes it easier to call recursively 
-    @staticmethod
-    def config_parser(attributes: list, config=Mapper) -> str:
-        """ Takes a filter argument and returns its 
-        respective query string for the url
-
-        :args attribute: 
-        :args config: the current configurations based on the mappings
-        """
-        conf_keys = config.keys()
-        query = ""
-
-        for attr in attributes:
-            if attr in conf_keys:
-                query = query + config[attr]
-            else:
-                return ""
-
-        return query
 
     def initalize_drivers(self, silent):
         # determine the operating system
         user_os = platform
         curr_path = os.getcwd()
-        print(curr_path)
 
         if user_os == "linux":
             path = curr_path + "/drivers/chromedriver_linux64/chromedriver"
@@ -89,7 +67,6 @@ class Scrapper:
         self.driver.get(curr_url)
         
         self.driver.maximize_window()
-        self.driver.implicitly_wait(20)
         posts = self.driver.find_elements_by_class_name("feed-grid__item")
 
         if not(posts):
@@ -114,8 +91,6 @@ class Scrapper:
             if "Best Matches" in [i.text for i in is_skip]:
                 continue
 
-            print([info.text for info in infos])
-            print(len(price))
 
             row = []
             row.append(infos[0].text)
@@ -132,42 +107,20 @@ class Scrapper:
 
                 # write a row to the csv file
                 writer.writerow(row)
+
     
     def run(self, config_path, num_pages=1):
         # Handles the configuration
-        config = read_conf(config_path)
-        conf_url = create_conf(config) 
-
+        config = Config()
+        conf_url, _ = config.create_conf(config_path) 
 
         # create the url
-        select_page = lambda x: (None + "&page={x}")
+        select_page = lambda x: (conf_url + f"&page={x}")
 
         # loop over pages
-
-
-        return None
-
-    def test_run(self, pages=1, page_range=None):
-        
-
-        test_url = "https://www.vinted.de/vetements?color_id[]=1&color_id[]=12&catalog[]=76"
-
-        if not(page_range):
-            page_from = 1
-            page_to = pages         
-        else:
-            if len(page_range) > 2: 
-                raise ValueError("Page range exceeds two values")
-
-            page_from = page_range[0]
-            page_to = page_range[1]
-
-        select_page = lambda x: (test_url + "&page={x}")
-        for page in range(page_from, page_to):
-
-            # add the page number
+        for page in range(1, num_pages+1):
             self.scrap_current(select_page(page))
-
+            # print(select_page(page))
 
     def article_images(self, art_url, sample=False, savepath=None):
         

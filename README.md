@@ -22,7 +22,7 @@ A function to scrap all the items given a search query. E.g. the user wants alle
 - [ ] Handling of the sub catrogires 
     - "Ripped Jeans" -> "Clothing"
     - "Manschenttenknöpfe" -> "Schmuck"
-- [ ] Creating mappings from "Manschenttenknöpfe" to clothing sizes
+- [X] Creating mappings from "Manschenttenknöpfe" to clothing sizes
 
 ### VISUALIZATION
 - [ ] Plotting the different attributes according to clothing type
@@ -51,7 +51,7 @@ Create conda env using:
 
 ## Instructions
 Each of the modules has a seperate argument. If you want to run the scrapper just type:  
-```python run.py --mode scrapper --page_range [1-15] --config_file main.yaml```
+```python run.py --mode scrapper --config "config.yaml" --max_page 12 --ds_name "test"```
 
 When running the scrapper you have to create or modifiy a config file. In this case this fill will be ```config.yaml```. Within this file you can specify which kind of clothes you want and also define some other parameters such as size, color, brands ect.. When creating the config file the entries should follow this pattern
 **config.yaml**
@@ -72,7 +72,7 @@ args:
 ```
 
 resulting urls should look something like:
-``` https://www.vinted.de/vetements?color_id[]=1&color_id[]=12&catalog[]=76&catalog[]=1904&time=1628187997&page=500 ```
+``` https://www.vinted.de/vetements?color_id[]=1&color_id[]=12&catalog[]=76&catalog[]=1904&time=1628187997&page=5 ```
 
 ## File structure
 - data

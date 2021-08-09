@@ -6,6 +6,7 @@ import os
 # such that we can use our module src
 sys.path.append('.')
 
+
 import tensorflow as tf
 
 

@@ -10,7 +10,7 @@ A function to scrap all the items given a search query. E.g. the user wants alle
     - [X] Handling min and max amount of articles to read
     - [X] Implementing a stop criterion
     - [X] Fail case. What happens if there is no next page?
-- [ ] Complete the category and size ids
+- [X] Complete the category and size ids
 
 #### Task 2
 - [X] Add another function to scrap the images from the articles
@@ -19,7 +19,7 @@ A function to scrap all the items given a search query. E.g. the user wants alle
 
 #### Task 3
 - [X] Reding of the config file and creating the respective url
-- [ ] Handling of the sub catrogires 
+- [X] Handling of the sub catrogires 
     - "Ripped Jeans" -> "Clothing"
     - "Manschenttenknöpfe" -> "Schmuck"
 - [X] Creating mappings from "Manschenttenknöpfe" to clothing sizes

@@ -69,10 +69,24 @@ args = [
 
 or using the yaml type description:
 ```
-args:
-    - {"gender": "femal", "category": shoes", "size": [36, 37], "color": ["red", "green"], "brand": ["nike", "addidas"]},
-    - {"gender": "male", "category": shoes", "size": [36, 37], "color": ["red", "green"], "brand": ["nike", "addidas"]},
-    - {"gender": "male", "category": pants", "size": ["M", "L"]}
+args: 
+  - 
+    brand: 
+      - nike
+      - addidas
+    category: shoes"
+    color: 
+      - red
+      - green
+    gender: femal
+    size: 
+      - 36
+      - 37
+  - 
+    brand: 
+      - nike
+      - addidas
+    ...
 ```
 
 resulting urls should look something like:

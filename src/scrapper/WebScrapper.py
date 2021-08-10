@@ -7,6 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 import os
+import re
 import csv
 import sys
 import time
@@ -152,4 +153,36 @@ class Scrapper:
                 as_list.append(temp_img)
 
         return as_list
+
+    def search_user(self, name) -> str:
+        """ Function to seach for an username. Will stop after searching
+        for it on the fist result page. Name should be matches with the fist entry
+        
+        returns: the url of the user 
+        """
+
+        search_url = "https://www.vinted.de/member/general/search?search_text="
+        search_url = search_url + name
+        
+        # get  the page
+        self.driver.get(search_url)
+
+        # check for empty results by looking for div elements
+        # with class: empty-state
+
+
+        # iterate over elements with the class of follow
+        # to get all users (serches for exact match)
+        pattern = re.compile(name)
+
+        users = self.driver.find_elements_by_class_name("follow")
+
+        for user in users:
+            temp = user.find_element_by_class_name("follow_name")
+            if pattern.fullmatch(temp.text):
+                link = temp.get_attribute("href")
+                return link
+
+
+
 

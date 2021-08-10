@@ -24,6 +24,10 @@ A function to scrap all the items given a search query. E.g. the user wants alle
     - "Manschenttenknöpfe" -> "Schmuck"
 - [X] Creating mappings from "Manschenttenknöpfe" to clothing sizes
 
+#### Task 4 
+- [ ] Search for users
+- [ ] Scrapp listings of that user 
+
 ### VISUALIZATION
 - [ ] Plotting the different attributes according to clothing type
 - [ ] Comparing availability between genders 

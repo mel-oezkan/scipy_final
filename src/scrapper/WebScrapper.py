@@ -228,12 +228,18 @@ class Scrapper:
             link = element.find_elements_by_tag_name("a")
             price = element.find_elements_by_tag_name("h3")
             
+            listing = link[0].get_attribute("href")
 
             information = element.find_elements_by_tag_name("h4")
-            size = information[0]
-            brand = information[1]
+            text_info = [x.text in information]
+            # somtimes there can be an entry without a size
+            # thus we have to check for empty entries in infos
+            if "" in information
 
-            row = [link[0], price[0], size, brand]
+            size = information[0].text
+            brand = information[1].text
+
+            row = [link[0].text, price[0].text, size, brand]
 
             with open(self.ds_path, 'a') as f:
                 # create the csv writer

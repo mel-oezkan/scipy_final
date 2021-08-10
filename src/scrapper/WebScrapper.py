@@ -169,7 +169,9 @@ class Scrapper:
 
         # check for empty results by looking for div elements
         # with class: empty-state
-
+        is_content = self.driver.find_elements_by_class_name("empty-state")
+        if not(is_content):
+            raise ValueError(f"the given name {name} does not yield any results")
 
         # iterate over elements with the class of follow
         # to get all users (serches for exact match)
@@ -178,11 +180,65 @@ class Scrapper:
         users = self.driver.find_elements_by_class_name("follow")
 
         for user in users:
-            temp = user.find_element_by_class_name("follow_name")
+            temp = user.find_element_by_class_name("follow__name")
             if pattern.fullmatch(temp.text):
                 link = temp.get_attribute("href")
                 return link
 
+    def user_entries(self, name, ds_name):
+        url = self.search_user(name)
 
+        self.driver.get(url)
 
+        SCROLL_PAUSE_TIME = 0.5
+
+        # since some pages have many entries the scrapper would have
+        # to scroll down the page to reveal all elements thus the 
+        # scrapper has to simulate this by itself
+
+        # get the scroll height
+        last_height = self.driver.execute_script(
+            "return document.body.scrollHeight")
+
+        while True:
+            # Scroll down to bottom
+            self.driver.execute_script(
+                "window.scrollTo(0, document.body.scrollHeight);")
+
+            # Wait to load page
+            time.sleep(SCROLL_PAUSE_TIME)
+
+            # Calculate new scroll height and compare with last scroll height
+            new_height = self.driver.execute_script(
+                "return document.body.scrollHeight")
+
+            if new_height == last_height:
+                break
+
+            last_height = new_height
+
+        # now all elemenst should be loaded in
+        # scrapping can start
+
+        # listings can be found by sarching for elements with
+        # class containing the name: feed-grid__item-content
+        elements = self.driver.find_elements_by_class_name("feed-grid__item-content")
+
+        for element in elements:
+            link = element.find_elements_by_tag_name("a")
+            price = element.find_elements_by_tag_name("h3")
+            
+
+            information = element.find_elements_by_tag_name("h4")
+            size = information[0]
+            brand = information[1]
+
+            row = [link[0], price[0], size, brand]
+
+            with open(self.ds_path, 'a') as f:
+                # create the csv writer
+                writer = csv.writer(f)
+
+                # write a row to the csv file
+                writer.writerow(row)
 

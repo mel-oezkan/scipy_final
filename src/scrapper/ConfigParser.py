@@ -25,6 +25,7 @@ class Config:
         """
 
         args = self.read_conf(config_path)
+        self.config = args
 
         # class will contain value
         url = self.base_url

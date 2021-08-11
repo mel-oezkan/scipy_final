@@ -60,9 +60,9 @@ class Scrapper:
         else:
             self.ds_path = "data/full_data.csv"
 
-    def scrap_current(self, curr_url):
+    def scrap_current(self, curr_url, curr_conf):
         """ Takes a url and searches for all articles which are
-        scrapped afterwards
+        scrapped afterwards. 
         """
         
         self.driver.get(curr_url)
@@ -94,6 +94,8 @@ class Scrapper:
 
 
             row = []
+            row.append(curr_conf["gender"])
+            row.append(curr_conf["category"])
             row.append(infos[0].text)
             row.append(infos[1].text)
             row.append(infos[2].text)
@@ -119,8 +121,8 @@ class Scrapper:
         select_page = lambda x: (conf_url + f"&page={x}")
 
         # loop over pages
-        for page in range(1, num_pages+1):
-            self.scrap_current(select_page(page))
+        for curr_conf, page in zip(config.config, range(1, num_pages+1)):
+            self.scrap_current(select_page(page), curr_conf)
             # print(select_page(page))
 
     def article_images(self, art_url, sample=False, savepath=None):
@@ -164,13 +166,15 @@ class Scrapper:
         search_url = "https://www.vinted.de/member/general/search?search_text="
         search_url = search_url + name
         
+        print(search_url)
+
         # get  the page
         self.driver.get(search_url)
 
         # check for empty results by looking for div elements
         # with class: empty-state
         is_content = self.driver.find_elements_by_class_name("empty-state")
-        if not(is_content):
+        if is_content:
             raise ValueError(f"the given name {name} does not yield any results")
 
         # iterate over elements with the class of follow
@@ -185,7 +189,8 @@ class Scrapper:
                 link = temp.get_attribute("href")
                 return link
 
-    def user_entries(self, name, ds_name):
+    def user_entries(self, name):
+        print("Searching for user")
         url = self.search_user(name)
 
         self.driver.get(url)
@@ -225,23 +230,70 @@ class Scrapper:
         elements = self.driver.find_elements_by_class_name("feed-grid__item-content")
 
         for element in elements:
+            print("iterate over listings")
             link = element.find_elements_by_tag_name("a")
             price = element.find_elements_by_tag_name("h3")
             
             listing = link[0].get_attribute("href")
 
             information = element.find_elements_by_tag_name("h4")
-            text_info = [x.text in information]
+            text_info = [x.text for x in information]
             # somtimes there can be an entry without a size
             # thus we have to check for empty entries in infos
-            # if "" in information
+            if "" in text_info:
+                # when this happens the size will not be displayed
+                # since a brand is always defined
+                likes = text_info[0]
+                size = None
+                brand = text_info[1]
+                
+            else:
+                likes = text_info[0]
+                size = text_info[2]
+                brand = text_info[1]
 
-            size = information[0].text
-            brand = information[1].text
+            # since the page scrapper contains gender and category
+            # we have to artificaialy get thos values 
+            # However, these values are contained in the listing url
+            # url = vinde.de/gender/clothing_type/category/sub_category1/.../sub_category_n/listing.id
+            url_args = listing.split("/")
+            print(url_args)
 
-            row = [link[0].text, price[0].text, size, brand]
+            # get the gender set for the listing
+            if "damen" in url_args:
+                gender = "female"
+                
+            elif "herren" in url_args:
+                gender = "male"
+            else:
+                # Since we only consider male and female clothing
+                # we will skip other items and clothing for children
+                continue
 
+            # we will only save the listings contained in the predefined
+            # mappings used in filtered web scrapper
+            possible_categories = list(Mapper[gender]["category"].keys())
+            
+            # pre initalization to test if the category is in our 
+            # predefined mappings
+            category = None
+
+            # using the reversed list to capute the most specific library
+            for url_arg in url_args[::-1]: 
+                print(url_arg)
+                if url_arg in possible_categories:
+                    category = url_arg
+                    break
+
+            if not(category):
+                break    
+
+            row = [gender, category, name, likes, listing, size, brand, price, listing]
+
+            print("writing to dataset")
+            print(self.ds_path)
             with open(self.ds_path, 'a') as f:
+                
                 # create the csv writer
                 writer = csv.writer(f)
 

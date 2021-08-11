@@ -3,6 +3,8 @@ import argparse
 
 from src.scrapper.WebScrapper import Scrapper
 
+print("HLLO")
+
 if __name__ == "__main__":
 
     # Initalize parset
@@ -11,6 +13,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--mode", type=str, required=True,
         help="arg for the respective mode")
+
+    parser.add_argument(
+        "--name", type=str, default=None,
+        help="name of user to scrap listings from")
 
     parser.add_argument(
         "--config", type=str, default=None,
@@ -31,14 +37,20 @@ if __name__ == "__main__":
 
     elif args.mode == "scrap":
         print("Running the training Module")
-
-        assert args.max_pages, "you have to define a range of pages you want to look for"
-        assert args.config, "you have to define the path to the search config"
-        
         scrapper = Scrapper(ds_name=args.ds_name)
-        scrapper.run(args.config, args.max_pages)
 
+        if args.name:
+            scrapper.user_entries(args.name)
 
+        elif (args.max_pages and args.config):
+            scrapper.run(args.config, args.max_pages)
+
+        else:
+            raise ValueError("You either have to define a \
+                name for the user searcher or define a path to \
+                a config file and a max_page range")
+        
+    
     elif args.mode == "annotate":
         print("Running the training Module")
     

@@ -6,13 +6,18 @@ class Config:
     def __init__(self):
         self.base_url = "https://www.vinted.de/vetements?"
 
-    def read_conf(self, config_path):
+    def read_conf(self, config_path:str):
+        """ Simple function to read a yaml file
+
+        :params config_path: path to the config file
+        """
+        
         with open(config_path, "r") as file:
             conf = yaml.load(file, Loader=yaml.FullLoader)
 
         return conf
 
-    def create_conf(self, config_path) -> str:
+    def create_conf(self, config_path:str) -> str:
         """ Given the different preferences the function maps those inputs into 
         their respective string notation and appends them to the url
         
@@ -22,6 +27,10 @@ class Config:
             {"gender": "male", "category": pants", "size": ["M", "L"]}
             {"gender": "male", "category": rings", "size": ["M", "L"]}
         ]
+
+        :params config_path: path to the config file
+
+        :returns base url combined with config tokens
         """
 
         args = self.read_conf(config_path)
@@ -113,7 +122,16 @@ class Config:
         return url, arg_dict
 
 
-    def main_category(self, sub):
+    def main_category(self, sub:str) -> str:
+        """ Function to look up what kind of size to use
+        given the category of the search
+
+        :params sub: short for sub category 
+            (e.g. stiefel would be mapped to shoes) 
+        
+        :returns string of main category
+        """
+
         size_lookup = Mapper["helper"]
 
         size_type = None

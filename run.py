@@ -3,8 +3,6 @@ import argparse
 
 from src.scrapper.WebScrapper import Scrapper
 
-print("HLLO")
-
 if __name__ == "__main__":
 
     # Initalize parset
@@ -49,6 +47,9 @@ if __name__ == "__main__":
             raise ValueError("You either have to define a \
                 name for the user searcher or define a path to \
                 a config file and a max_page range")
+        
+        scrapper.driver.quit()
+        print("finished scrapping")
         
     
     elif args.mode == "annotate":

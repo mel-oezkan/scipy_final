@@ -1,3 +1,13 @@
+"""
+Since there is no simple way of getting the tokens of clothing type.
+Thus we manually looked up the categories and typed the mappings.
+
+In the future this could be automized by iterating over values ranging
+from 1 to n. If there is an listing given the token value open one
+of the listings and look for its category. Select the majority voting of them.
+"""
+
+
 
 # Category: CLOTHES
 clothes_f = {
@@ -92,17 +102,32 @@ ring_sizes = {
 size_category_map = {
 
     "shoes": [
-        "stiefel", "oxfords", "slippers",
-        "elegante schuhe", "sportschuhe",
-        "sandalen", "turnschuhe"],
+        "stiefel",
+        "flipflops",
+        "turnschuhe",
+        "sportschuhe",
+        "stiefel",
+        "gummistiefel",
+        "cowboystiefel",
+        "boots",
+        "absatzschuhe",
+        "flache_schuh",
+        "ballerinas",
+        "stiefelette",
+        "turnschuhe",
+        "sandalen",
+        "flip-flop"],
 
     "clothes": [
-        "mäntel", "jacken", "hemden",
-        "pullis", "t-shirts", "westen",
+        "mäntel", "jacken", "hemden","anzughosen",
+        "pullis", "t-shirts", "westen", "oberbekleidung",
         "hosen", "jeans", "shorts", "sport_pulli", 
-        "sport_shorts", "trainingsanzüge",
-        "gürtel", "sonnenbrillen",
-        "lange pullover"],
+        "sport_shorts", "trainingsanzüge", "kapuzenjacken",
+        "gürtel", "sonnenbrillen","pullover-and-sweater",
+        "sweater","lange pullover","pullis","hoodies",
+        "hemden", "rocke", "tuniken", "shirts",
+        "hoodies-and-langarmshirts", "tops-and-t-shirts",
+        "blusen", "hosen-and-leggings", "kleider"],
 
     "rings": ["ringe"]
 }
@@ -110,22 +135,32 @@ size_category_map = {
 
 # only all 
 male_catergories = {
-    "jeans": "catalog[]=257",
-    "jacken": "catalog[]=2052",
-    "mäntel": "catalog[]=2051",
-    "hemden": "catalog[]=536",
-    "t-Shirts": "catalog[]=77",
-    "anzughosen": "catalog[]=1787",
-    "sweater": "catalog[]=1811",
-    "pullis": "catalog[]=267",
-    "hoodies": "catalog[]=267",
-    "kapuzenjacken": "catalog[]=1812",
-    "rollkragenpullover": "catalog[]=265",
-    "lange pullover": "catalog[]=1814",
+    "stiefel": "catalog[]=1233", 
     "flipflops": "catalog[]=1237",
     "turnschuhe": "catalog[]=1242",
     "sportschuhe": "catalog[]=1452",
-    "stiefel": "catalog[]=1233", 
+    
+    
+    "jeans": "catalog[]=257",
+    "anzughosen": "catalog[]=1787",
+    
+    "oberbekleidung": "catalog[]=1206",
+
+    "jacken": "catalog[]=2052",
+    "mantel": "catalog[]=2051",
+    "kapuzenjacken": "catalog[]=1812",
+    
+    "rollkragenpullover": "catalog[]=265",
+    
+    "pullover-and-sweater": "catalog[]=79",
+    "lange pullover": "catalog[]=1814",
+    "sweater": "catalog[]=1811",
+    "pullis": "catalog[]=267",
+    "hoodies": "catalog[]=267",
+    
+    "hemden": "catalog[]=536",
+    "t-shirts": "catalog[]=77",
+    
 } 
 
 female_catergories = {
@@ -140,10 +175,30 @@ female_catergories = {
     "turnschuhe": "catalog[]=1916",
     "sandalen": "catalog[]=207",
     "flip-flops": "catalog[]=546",
+
     "sonnenbrillen": "catalog[]=26",
     "ringe": "catalog[]=553",
     "ketten": "catalog[]=164",
     "ohrringe": "catalog[]=163",
+
+    "kleider": "catalog[]=10",
+    "rocke": "catalog[]=11",
+    "jeans": "catalog[]=183",
+    "hosen-and-leggings": "catalog[]=9",
+
+    "mantel-and-jacken": "catalog[]=1037",
+    "mantel": "catalog[]=1907",
+    "jacken": "catalog[]=1908",
+    
+    "tops-and-t-shirts": "catalog[]=12",
+    "tuniken": "catalog[]=227",
+    "shirts": "catalog[]=222",
+    "blusen": "catalog[]=1043",
+    "t-shirts": "catalog[]=221",
+
+    "hoodies-and-langarmshirts": "catalog[]=196",
+    "sweater": "catalog[]=1917",
+    
 } 
 
 male_sizes = {
@@ -170,7 +225,9 @@ brands = {
     "lacoste": 'brand_id[]=304',
     "calvin klein": 'brand_id[]=255',
     "guess": 'brand_id[]=20',
-    "michael kors": 'brand_id[]=6005'
+    "michael kors": 'brand_id[]=6005',
+    "vintage":"brand_id[]=573",
+
 }
 
 colors = {

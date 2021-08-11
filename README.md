@@ -25,8 +25,9 @@ A function to scrap all the items given a search query. E.g. the user wants alle
 - [X] Creating mappings from "Manschenttenknöpfe" to clothing sizes
 
 #### Task 4 
-- [ ] Search for users
-- [ ] Scrapp listings of that user 
+- [x] Search for users
+- [X] Scroll to the end of the user page
+- [x] Scrapp listings of that user 
 
 ### VISUALIZATION
 - [ ] Plotting the different attributes according to clothing type
@@ -91,6 +92,14 @@ args:
 
 resulting urls should look something like:
 ``` https://www.vinted.de/vetements?color_id[]=1&color_id[]=12&catalog[]=76&catalog[]=1904&time=1628187997&page=5 ```
+
+
+The second option for the scrapper is searching for an username and scrapping all listings this user has.
+``` 
+python run.py --mode scrap --name <username> --ds_name <dataset_name>
+```
+
+where <username> would be the name of the user and <dataset_name> is the name of the datset.
 
 ## File structure
 - data

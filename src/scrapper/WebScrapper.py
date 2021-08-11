@@ -234,7 +234,7 @@ class Scrapper:
             text_info = [x.text in information]
             # somtimes there can be an entry without a size
             # thus we have to check for empty entries in infos
-            if "" in information
+            # if "" in information
 
             size = information[0].text
             brand = information[1].text

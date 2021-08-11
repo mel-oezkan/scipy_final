@@ -107,3 +107,6 @@ resulting urls should look something like:
 │   └── annotator.py  
 │   └── scrapper.py  
 │   └── trainer.py  
+
+## Visualization of the scrapper
+![structure](documentation/structure.png "Title")

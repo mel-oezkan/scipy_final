@@ -1,62 +1,30 @@
 # Scientific Python - Final Project
 
-## ToDo:
-### SCRAPPER
-
-#### Task 1
-A function to scrap all the items given a search query. E.g. the user wants alle entries from page 1 to 10 containing male t-shirts.
-
-- [X] Iterating trough the pages 
-    - [X] Handling min and max amount of articles to read
-    - [X] Implementing a stop criterion
-    - [X] Fail case. What happens if there is no next page?
-- [X] Complete the category and size ids
-
-#### Task 2
-- [X] Add another function to scrap the images from the articles
-- [X] Needs a error handler
-    - Page can be already deleted such that reading images will result in error
-
-#### Task 3
-- [X] Reding of the config file and creating the respective url
-- [X] Handling of the sub catrogires 
-    - "Ripped Jeans" -> "Clothing"
-    - "Manschenttenknöpfe" -> "Schmuck"
-- [X] Creating mappings from "Manschenttenknöpfe" to clothing sizes
-
-#### Task 4 
-- [x] Search for users
-- [X] Scroll to the end of the user page
-- [x] Scrapp listings of that user 
-
-### VISUALIZATION
-- [ ] Plotting the different attributes according to clothing type
-- [ ] Comparing availability between genders 
-- [ ] Plot the color diversity between genders
-- [X] Sampling 4 rows from the dataset and ploting the images of those articles
-    - (implemented in ```src/utils/visualizer.py```)
-    - amount can be changed by modifiying the range it iterates trough
-- ...
-
-##### Further improvements
-- Adding negative configs (All colors except green)
-
-
 ## Short description
-This project will contain an interactive **web scrapper** with an **user interface** based on the browser where the use will be able to filter their search and **annotate** the scrapped data. However the scrapper will only work on the webstore of Vinted.com.
+The motivation behind this project was to optimize online shopping for second hand clothes. Instead of clicking through the webstore and configuring your search there, we wanted a solution that transforms the graphical interface into a .csv file that can then be analysed efficiently.
+We realised this by an interactive **web scrapper** with an **user interface** based on the browser, where the user is able to filter the search and **annotate** the scrapped data. There is also an option to scrape every listing a user has. The scrapper works on the webstore of Vinted.com. Furthermore, the data provided by the webscrapper will be analyzed regarding differences in clothes for women and men. This analysis is done in the AnalysisVintedStore.ipynb and can be followed there.
 
 ## Requirements
 For the scrapper to run 
+Please activate the scipy environment that we used in this course:
+``` conda activate scipy ```
+
+We need some additional packages:
 
 Install python requirements using pip:  
 ```pip install -r requirements.txt```  
-
+"
 Create conda env using:  
 ```conda env create -f scrapper.yml ```
 
+Troubleshooting Selenium:
+For the use of selenium you might need a specific chromedriver (Chrome version 92 for windows version 93 for linux or mac). If you have problems you can download a chrome driver for the version your browser uses here: https://chromedriver.chromium.org/downloads 
+Then you need the replace the default driver under "drivers/chromedriver_win32" or linux64 or mac64(chromedriver_your_operating_system).
+
 ## Instructions
-Each of the modules has a seperate argument. If you want to run the scrapper just type:  
+Each of the modules has a seperate argument. If you want to run the scrapper in your terminal just type:  
 ```python run.py --mode scrapper --config "config.yaml" --max_page 12 --ds_name "test"```
+You can change the maximum number of pages scrapped using the max_page attribute and also the name of the data set that will be created ds_name 
 
 When running the scrapper you have to create or modifiy a config file. In this case this fill will be ```config.yaml```. Within this file you can specify which kind of clothes you want and also define some other parameters such as size, color, brands ect.. When creating the config file the entries should follow this pattern
 **config.yaml**
@@ -100,6 +68,9 @@ python run.py --mode scrap --name <username> --ds_name <dataset_name>
 ```
 
 where <username> would be the name of the user and <dataset_name> is the name of the datset.
+    
+## Example output
+
 
 ## File structure
 - data

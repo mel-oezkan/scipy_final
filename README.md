@@ -23,7 +23,7 @@ Then you need the replace the default driver under "drivers/chromedriver_win32" 
 
 ## Instructions
 Each of the modules has a seperate argument. If you want to run the scrapper in your terminal just type:  
-```python run.py --mode scrapper --config "config.yaml" --max_page 12 --ds_name "test"```
+```python run.py --mode scrap --config "config.yaml" --max_page 12 --ds_name "test"```
 You can change the maximum number of pages scrapped using the max_page attribute and also the name of the data set that will be created ds_name 
 
 When running the scrapper you have to create or modifiy a config file. In this case this fill will be ```config.yaml```. Within this file you can specify which kind of clothes you want and also define some other parameters such as size, color, brands ect.. When creating the config file the entries should follow this pattern

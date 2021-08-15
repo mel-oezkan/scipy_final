@@ -119,11 +119,11 @@ size_category_map = {
         "flip-flop"],
 
     "clothes": [
-        "mäntel", "jacken", "hemden","anzughosen",
+        "mantel", "jacken", "hemden","anzughosen",
         "pullis", "t-shirts", "westen", "oberbekleidung",
         "hosen", "jeans", "shorts", "sport_pulli", 
-        "sport_shorts", "trainingsanzüge", "kapuzenjacken",
-        "gürtel", "sonnenbrillen","pullover-and-sweater",
+        "sport_shorts", "trainingsanzuege", "kapuzenjacken",
+        "guertel", "sonnenbrillen","pullover-and-sweater",
         "sweater","lange pullover","pullis","hoodies",
         "hemden", "rocke", "tuniken", "shirts",
         "hoodies-and-langarmshirts", "tops-and-t-shirts",
@@ -134,7 +134,7 @@ size_category_map = {
 
 
 # only all 
-male_catergories = {
+male_categories = {
     "stiefel": "catalog[]=1233", 
     "flipflops": "catalog[]=1237",
     "turnschuhe": "catalog[]=1242",
@@ -163,7 +163,7 @@ male_catergories = {
     
 } 
 
-female_catergories = {
+female_categories = {
     "stiefel": "catalog[]=211",
     "gummistiefel": "catalog[]=2135",
     "cowboystiefel": "catalog[]=54",
@@ -248,10 +248,10 @@ colors = {
     "hellblau": 'color_id[]=26',
     "blau": 'color_id[]=9',
     "marienblau": 'color_id[]=27',
-    "türkis": 'color_id[]=17',
-    "mintgrün": 'color_id[]=30',
-    "grün": 'color_id[]=10',
-    "dunkelgrün": 'color_id[]=28',
+    "tuerkis": 'color_id[]=17',
+    "mintgruen": 'color_id[]=30',
+    "gruen": 'color_id[]=10',
+    "dunkelgruen": 'color_id[]=28',
     "khaki": 'color_id[]=16',
     "braun": 'color_id[]=2',
     "senffarben": 'color_id[]=29',

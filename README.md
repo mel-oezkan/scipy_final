@@ -26,13 +26,16 @@ Each of the modules has a seperate argument. If you want to run the scrapper in 
 ```python run.py --mode scrap --config "config.yaml" --max_page 12 --ds_name "test"```
 You can change the maximum number of pages scrapped using the max_page attribute and also the name of the data set that will be created ds_name 
 
-When running the scrapper you have to create or modifiy a config file. In this case this fill will be ```config.yaml```. Within this file you can specify which kind of clothes you want and also define some other parameters such as size, color, brands ect.. When creating the config file the entries should follow this pattern
+When running the scrapper you have to create or modifiy a config file. In this case this fill will be ```config.yaml```. Within this file you can specify which kind of clothes you want and also define some other parameters such as size, color, brands ect.. When creating the config file the entries should follow this pattern.
+As we use the German version of the webstore Vinted you have to use german colors and terms for the categories. In the IdMaps.py file you can find an extensive overview of possible values for these parameters. Please use ue, ae and oe instead of ü,ä and ö respectively.
+
 **config.yaml**
 ```
 args = [
-        {"gender": "femal", "category": shoes", "size": [36, 37], "color": ["red", "green"], "brand": ["nike", "addidas"]},
-        {"gender": "male", "category": shoes", "size": [36, 37], "color": ["red", "green"], "brand": ["nike", "addidas"]},
-        {"gender": "male", "category": pants", "size": ["M", "L"]}
+    - {"gender": "female", "category": "turnschuhe", "size": [36, 37], "color": ["rot", "gruen"], "brand": ["nike", "addidas"]}   
+    - {"gender": "male", "category": "sportschuhe", "size": [42, 43], "color": ["rot", "tuerkis"], "brand": ["nike", "addidas"]}
+    - {"gender": "male", "category": "mantel", "size": ["M", "L"]}
+    - {"gender": "female", "category": "ringe", "size": [14.9, 15.3, 15.7]}
     ]
 ```
 
@@ -43,10 +46,10 @@ args:
     brand: 
       - nike
       - addidas
-    category: shoes"
+    category: "turnschuhe"
     color: 
-      - red
-      - green
+      - rot
+      - gruen
     gender: femal
     size: 
       - 36
@@ -57,7 +60,6 @@ args:
       - addidas
     ...
 ```
-
 resulting urls should look something like:
 ``` https://www.vinted.de/vetements?color_id[]=1&color_id[]=12&catalog[]=76&catalog[]=1904&time=1628187997&page=5 ```
 

@@ -29,8 +29,8 @@ class Scrapper:
         self.base_url = "https://www.vinted.de/vetements?"
 
     def initalize_drivers(self, silent):
-        """ Initalizes the 'browser'. This will require a 
-        functioning chromdriver and chrome isntalled. 
+        """ Initalizes the 'browser'. This will require a
+        functioning chromdriver and chrome installed.
         If the chromdriver does not match the chrome browser
         the user will be prompted to download a matching one
         """
@@ -41,7 +41,7 @@ class Scrapper:
 
         if user_os == "linux":
             path = curr_path + "/drivers/chromedriver_linux64/chromedriver"
-        
+
         elif user_os == "win32":
             path = curr_path + "/drivers/chromedriver_win32/chromedriver"
 
@@ -52,14 +52,14 @@ class Scrapper:
         else:
             raise ValueError(
                 "It seems as if the current chromdriver does not \
-                work on your device. Try downloading a suitable chromdirve at \
+                work on your device. Try downloading a suitable chromdriver at \
                 https://chromedriver.chromium.org/ and repace it in the \
                 folder of your respective os. After that tyr running \
                 this script again")
 
         options = webdriver.ChromeOptions()
         if silent:
-            
+
             options.add_argument("headless")
             options.add_argument('disable-blink-features=AutomationControlled')
             options.add_argument('user-agent=fake_user')
@@ -68,8 +68,8 @@ class Scrapper:
         self.driver = webdriver.Chrome(path, chrome_options=options)
 
     def _handle_ds(self, name=None):
-        """ Checks if name was set. If not append to global ds """ 
-        
+        """ Checks if name was set. If not append to global ds """
+
         if name:
             self.ds_path = f"data/{name}.csv"
         else:
@@ -79,31 +79,31 @@ class Scrapper:
         """ Takes the modified url (by config) and searches the page for listings.
         Given the listings it scraps the information from them and appends them
         to the respective dataset (csv file)
- 
-        :params curr_ulr: url on which the config tokens are already applied 
+
+        :params curr_ulr: url on which the config tokens are already applied
             (or possibly any url with similar page structure and class naming)
         :params curr_conf: only used to get search parametes for better handling
             of the datasets
         """
-        
+
         self.driver.get(curr_url)
-        
+
         self.driver.maximize_window()
         posts = self.driver.find_elements_by_class_name("feed-grid__item")
 
         if not(posts):
             sys.exit(0)
-        
+
         for index, post in enumerate(posts):
-            
+
             price = post.find_elements_by_tag_name("h3")
-            
+
             # 0:auth, 1:likes, 2:size, 3:brand
             infos = post.find_elements_by_tag_name("h4")
 
-            # Best matches contains span text indicating a skip section 
+            # Best matches contains span text indicating a skip section
             is_skip = post.find_elements_by_tag_name("span")
-            
+
             links = post.find_elements_by_tag_name("a")
 
             auth_source = links[0].get_attribute("href")
@@ -132,13 +132,13 @@ class Scrapper:
                 # write a row to the csv file
                 writer.writerow(row)
 
-    
+
     def run(self, config_path, num_pages=1):
         """ Runs the scrapper given a search parameter config"""
 
         # Handles the configuration
         config = Config()
-        conf_url, _ = config.create_conf(config_path) 
+        conf_url, _ = config.create_conf(config_path)
 
         # create the url
         select_page = lambda x: (conf_url + f"&page={x}")
@@ -151,20 +151,20 @@ class Scrapper:
     def article_images(self, art_url, sample=False, savepath=None):
         """ Visits the listings url and either all images as numpy array
         or only the main image
-        
+
         :params art_url: url of the listing
         :params sample: parameter to decide wether to return all images
             of the listing or only one sample. (True -> only main image)
         :params savepath: path where to save the scrapped image
         """
-        
+
         self.driver.get(art_url)
         self.driver.implicitly_wait(5)
         image_container = self.driver.find_element_by_class_name("item-photos")
-        
+
 
         if not(image_container):
-            # returns None which will be a signal 
+            # returns None which will be a signal
             # for the main code to act acordingly
             return None
 
@@ -174,7 +174,7 @@ class Scrapper:
 
         for img in images:
             img_url = img.get_attribute("href")
-            
+
             if savepath:
                 file_path = os.path.join(savepath, f"{time.time():.0f}.jpg")
                 urllib.request.urlretrieve(img_url, file_path)
@@ -190,8 +190,8 @@ class Scrapper:
     def search_user(self, name) -> str:
         """ Function to seach for an username. Will stop after searching
         for it on the fist result page. Name should be matches with the fist entry
-        
-        returns: the url of the user 
+
+        returns: the url of the user
         """
 
         search_url = "https://www.vinted.de/member/general/search?search_text="
@@ -219,10 +219,10 @@ class Scrapper:
                 return link
 
     def user_entries(self, name:str):
-        """ Given an username this method will first search for the user 
+        """ Given an username this method will first search for the user
         url. After visiting the user page it will first scroll to the bottom of
-        the page to load all listings and than scrap every listing while also 
-        looking at the listing url to get infromation about gender and category.
+        the page to load all listings and than scrap every listing while also
+        looking at the listing url to get information about gender and category.
 
         :params name: name of the user
         """
@@ -234,22 +234,22 @@ class Scrapper:
 
 
         # since some pages have many entries the scrapper would have
-        # to scroll down the page to reveal all elements thus the 
+        # to scroll down the page to reveal all elements thus the
         # scrapper has to simulate this by itself
 
         # get the scroll height
         last_height = self.driver.execute_script(
             "return document.body.scrollHeight")
         latest_stop = 0
-        
-        print("start scrolling") 
+
+        print("start scrolling")
         while True:
-               
-        
+
+
             # There is some js (mabe react) code which detect is the visitor
             # jumps to the end of the page thus we have to eas into the
             # scrolling part and wait create a smooth scrolling part
-        
+
             # Scroll down to bottom
             self.driver.execute_script(
                     f"window.scrollTo({latest_stop}, document.body.scrollHeight-300);")
@@ -271,7 +271,7 @@ class Scrapper:
                 break
 
             last_height = new_height
-        
+
         print("finished scrolling")
 
         # now all elemenst should be loaded in
@@ -285,7 +285,7 @@ class Scrapper:
             link = element.find_elements_by_tag_name("a")
             price = element.find_elements_by_tag_name("h3")
             price = price[0].text
-            
+
             listing = link[0].get_attribute("href")
 
             information = element.find_elements_by_tag_name("h4")
@@ -298,14 +298,14 @@ class Scrapper:
                 likes = text_info[0]
                 size = None
                 brand = text_info[1]
-                
+
             else:
                 likes = text_info[0]
                 size = text_info[2]
                 brand = text_info[1]
 
             # since the page scrapper contains gender and category
-            # we have to artificaialy get thos values 
+            # we have to artificaialy get thos values
             # However, these values are contained in the listing url
             # url = vinde.de/gender/clothing_type/category/sub_category1/.../sub_category_n/listing.id
             url_args = listing.split("/")
@@ -313,7 +313,7 @@ class Scrapper:
             # get the gender set for the listing
             if "damen" in url_args:
                 gender = "female"
-                
+
             elif "herren" in url_args:
                 gender = "male"
             else:
@@ -324,13 +324,13 @@ class Scrapper:
             # we will only save the listings contained in the predefined
             # mappings used in filtered web scrapper
             possible_categories = list(Mapper[gender]["category"].keys())
-            
-            # pre initalization to test if the category is in our 
+
+            # pre initalization to test if the category is in our
             # predefined mappings
             category = None
 
             # using the reversed list to capute the most specific library
-            for url_arg in url_args[::-1]: 
+            for url_arg in url_args[::-1]:
                 # print(url_arg)
                 if url_arg in possible_categories:
                     category = url_arg
@@ -339,15 +339,14 @@ class Scrapper:
             if not(category):
                 # print the uls of listings that didn't make it
                 # print(url_args)
-                continue    
+                continue
 
             row = [gender, category, name, likes, size, brand, price, listing]
 
             with open(self.ds_path, 'a') as f:
-                
+
                 # create the csv writer
                 writer = csv.writer(f)
 
                 # write a row to the csv file
                 writer.writerow(row)
-

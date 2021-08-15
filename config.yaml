@@ -1,4 +1,4 @@
-- {"gender": "female", "category": "turnschuhe", "size": [36, 37], "color": ["rot", "grün"], "brand": ["nike", "addidas"]}
-- {"gender": "male", "category": "sportschuhe", "size": [42, 43], "color": ["rot", "grün"], "brand": ["nike", "addidas"]}
-- {"gender": "male", "category": "lange pullover", "size": ["M", "L"]}
+- {"gender": "female", "category": "turnschuhe", "size": [36, 37], "color": ["rot", "gruen"], "brand": ["nike", "addidas"]}
+- {"gender": "male", "category": "sportschuhe", "size": [42, 43], "color": ["rot", "tuerkis"], "brand": ["nike", "addidas"]}
+- {"gender": "male", "category": "mantel", "size": ["M", "L"]}
 - {"gender": "female", "category": "ringe", "size": [14.9, 15.3, 15.7]}

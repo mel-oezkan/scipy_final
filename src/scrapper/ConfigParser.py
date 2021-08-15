@@ -51,7 +51,7 @@ class Config:
 
             # check for category
             assert isinstance(arg["category"], str), """Only accepts single category types, to 
-                include multiple category just append them to the args"""
+                include multiple categories just append them to the args"""
 
             # Handling of cases in which args are empty
             conf_categories = temp_conf["category"]
@@ -67,7 +67,7 @@ class Config:
 
             # since some categories share the same sizes we 
             # need a way of looking up which sizes the config 
-            # shoudl grab 
+            # should grab 
 
             size_type = self.main_category(arg["category"])
 
@@ -83,7 +83,7 @@ class Config:
 
                     # check if value is a valid key for the dict
                     if size not in size_conf: 
-                        raise ValueError(f"Argument {size} is not supported. Either change the sizes or contac the creators via github")
+                        raise ValueError(f"Argument {size} is not supported. Either change the sizes or contact the creators via github")
 
                     # add the respective url tokens based on the 
                     # given catergory
@@ -96,7 +96,7 @@ class Config:
                     # add the respective url tokens based on the 
                     # given catergory
                     if color not in color_conf: 
-                        raise ValueError(f"Argument {color} is not supported. Either change the sizes or contac the creators via github")
+                        raise ValueError(f"Argument {color} is not supported. Either change the sizes or contact the creators via github")
                         
 
                     color_token = color_conf[color]
@@ -108,13 +108,13 @@ class Config:
                     # add the respective url tokens based on the 
                     # given catergory
                     if brand not in brand_conf: 
-                        raise ValueError(f"Argument {brand} is not supported. Either change the sizes or contac the creators via github")
+                        raise ValueError(f"Argument {brand} is not supported. Either change the sizes or contact the creators via github")
                         
                     brand_token = brand_conf[brand]
                     arg_dict["brands"].append(brand_token)
 
-        # Using the dict mehtod to create the final url
-        # allows for delteting multiples befor generation 
+        # Using the dict method to create the final url
+        # allows for deleting multiples befor generation 
         for key in arg_dict.keys():
             for token in set(arg_dict[key]):
                 url += str(token) + "&"
